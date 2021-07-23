@@ -1,62 +1,61 @@
-const User = require("../../models/users");
+const Category = require("../../models/category");
 
-let storageUser = {
+let storageCategory = {
 	getAll: async () => {
 		try {
-			const resultUser = await User.find();
+			const categories = await Category.find();
 
-			if (!resultUser) {
-				return "No users in DB";
+			if (!categories) {
+				return "Not found in DB";
 			}
 
-			return resultUser;
+			return categories;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	getOne: async id => {
 		try {
-			let user = await User.findOne({ _id: id });
+			let category = await Category.findOne({ _id: id });
 
-			if (!user) {
+			if (!category) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return category;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	create: async data => {
 		try {
-			const resultUser = await User.create(data);
-			return resultUser;
+			const category = await Category.create(data);
+
+			return category;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	updateOne: async (id, data) => {
 		try {
-			let user = await User.findOneAndUpdate(
-				{
-					_id: id,
-				},
+			let category = await Category.findOneAndUpdate(
+				{ _id: id },
 				{ ...data },
 				{ new: true }
 			);
 
-			if (!user) {
+			if (!category) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return category;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	deleteOne: async id => {
 		try {
-			await User.findByIdAndRemove({ _id: id });
+			await Category.findByIdAndRemove({ _id: id });
 
 			return "Deleted";
 		} catch (error) {
@@ -65,4 +64,4 @@ let storageUser = {
 	},
 };
 
-module.exports = storageUser;
+module.exports = storageCategory;

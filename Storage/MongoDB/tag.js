@@ -1,62 +1,60 @@
-const User = require("../../models/users");
+const Tag = require("../../models/tag");
 
-let storageUser = {
+let storageTag = {
 	getAll: async () => {
 		try {
-			const resultUser = await User.find();
+			const tags = await Tag.find();
 
-			if (!resultUser) {
-				return "No users in DB";
+			if (!tags) {
+				return "Not found in DB";
 			}
 
-			return resultUser;
+			return tags;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	getOne: async id => {
 		try {
-			let user = await User.findOne({ _id: id });
+			const tag = await Tag.findOne({ _id: id });
 
-			if (!user) {
+			if (!tag) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return tag;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	create: async data => {
 		try {
-			const resultUser = await User.create(data);
-			return resultUser;
+			let tag = await Post.create(data);
+			return tag;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	updateOne: async (id, data) => {
 		try {
-			let user = await User.findOneAndUpdate(
-				{
-					_id: id,
-				},
+			let tag = await Tag.findOneAndUpdate(
+				{ _id: id },
 				{ ...data },
 				{ new: true }
 			);
 
-			if (!user) {
+			if (!tag) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return tag;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	deleteOne: async id => {
 		try {
-			await User.findByIdAndRemove({ _id: id });
+			await Tag.findByIdAndRemove({ _id: id });
 
 			return "Deleted";
 		} catch (error) {
@@ -65,4 +63,4 @@ let storageUser = {
 	},
 };
 
-module.exports = storageUser;
+module.exports = storageTag;

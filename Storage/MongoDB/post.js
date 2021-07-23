@@ -1,62 +1,60 @@
-const User = require("../../models/users");
+const Post = require("../../models/post");
 
-let storageUser = {
+let storagePost = {
 	getAll: async () => {
 		try {
-			const resultUser = await User.find();
+			let posts = await Post.find();
 
-			if (!resultUser) {
-				return "No users in DB";
+			if (!posts) {
+				return "Not found in DB";
 			}
 
-			return resultUser;
+			return posts;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	getOne: async id => {
 		try {
-			let user = await User.findOne({ _id: id });
+			let post = await Post.findOne({ _id: id });
 
-			if (!user) {
+			if (!post) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return post;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	create: async data => {
 		try {
-			const resultUser = await User.create(data);
-			return resultUser;
+			const post = await Post.create(data);
+			return post;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	updateOne: async (id, data) => {
 		try {
-			let user = await User.findOneAndUpdate(
-				{
-					_id: id,
-				},
+			let post = await Post.findOneAndUpdate(
+				{ _id: id },
 				{ ...data },
 				{ new: true }
 			);
 
-			if (!user) {
+			if (!post) {
 				return "Not found in DB";
 			}
 
-			return user;
+			return post;
 		} catch (error) {
 			return error.message;
 		}
 	},
 	deleteOne: async id => {
 		try {
-			await User.findByIdAndRemove({ _id: id });
+			await Post.findByIdAndRemove({ _id: id });
 
 			return "Deleted";
 		} catch (error) {
@@ -65,4 +63,4 @@ let storageUser = {
 	},
 };
 
-module.exports = storageUser;
+module.exports = storagePost;
