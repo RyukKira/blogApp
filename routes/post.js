@@ -1,12 +1,12 @@
-const validateUser = require("../validators/users");
-const storageUser = require("../Storage/MongoDB/users");
+const validatePost = require("../validators/post");
+const storagePost = require("../Storage/MongoDB/post");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
 	try {
-		const user = await storageUser.getAll();
-		return res.status(200).send(user);
+		const post = await storagePost.getAll();
+		return res.status(200).send(post);
 	} catch (error) {
 		return res.status(404).send("Not found in DB");
 	}
@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
-		const user = await storageUser.getOne(req.params.id);
-		return res.status(200).send(user);
+		const post = await storagePost.getOne(req.params.id);
+		return res.status(200).send(post);
 	} catch (error) {
 		return res.status(404).send("Not found in DB with the given ID");
 	}
@@ -23,11 +23,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
 	try {
-		const { error } = validateUser(req.body);
+		const { error } = validatePost(req.body);
 		if (error) throw new Error(error.message);
 
-		const user = await storageUser.create(req.body);
-		return res.status(201).send({ success: true, id: user });
+		const post = await storagePost.create(req.body);
+		return res.status(201).send({ success: true, id: post });
 	} catch (error) {
 		return res.status(404).send("Create valid data, please");
 	}
@@ -35,11 +35,11 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
-		const { error } = validateUser(req.body);
+		const { error } = validatePost(req.body);
 		if (error) throw new Error(error.message);
 
-		const updatedUser = await storageUser.updateOne(req.params.id, req.body);
-		return res.status(200).send({ id: updatedUser });
+		const updatedPost = await storagePost.updateOne(req.params.id, req.body);
+		return res.status(200).send({ id: updatedPost });
 	} catch (error) {
 		return res.status(404).send("Not found such ID in DB");
 	}
@@ -47,8 +47,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
-		const user = await storageUser.deleteOne(req.params.id);
-		return res.status(200).send({ msg: user });
+		const post = await storagePost.deleteOne(req.params.id);
+		return res.status(200).send({ msg: post });
 	} catch (error) {
 		return res
 			.status(404)
