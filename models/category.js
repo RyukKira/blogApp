@@ -11,8 +11,6 @@ const Category = mongoose.model(
 		name: {
 			type: String,
 			required: [true, "name field is required"],
-			minlength: 6,
-			maxlength: 30,
 		},
 	})
 );

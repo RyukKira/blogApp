@@ -19,14 +19,10 @@ const Post = mongoose.model(
 		title: {
 			type: String,
 			required: [true, "Title field is required"],
-			minlength: 6,
-			maxlength: 20,
 		},
 		body: {
 			type: String,
 			required: [true, "Body field is required"],
-			minlength: 15,
-			maxlength: 1000,
 		},
 		categoryID: {
 			type: Schema.Types.ObjectId,
@@ -42,8 +38,6 @@ const Post = mongoose.model(
 		],
 		author: {
 			type: String,
-			minlength: 5,
-			maxlength: 30,
 		},
 	})
 );

@@ -11,8 +11,6 @@ const Tag = mongoose.model(
 		name: {
 			type: String,
 			required: [true, "Name field is required"],
-			minlength: 5,
-			maxlength: 20,
 		},
 	})
 );

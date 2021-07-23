@@ -12,26 +12,18 @@ const User = mongoose.model(
 			firstName: {
 				type: String,
 				required: [true, "FirstName field is required"],
-				minlength: 6,
-				maxlength: 15,
 			},
 			lastName: String,
-			minlength: 8,
-			maxlength: 16,
 		},
 		email: {
 			type: String,
 			required: [true, "email field is required"],
 			unique: true,
-			minlength: 8,
-			maxlength: 50,
 		},
 		password: {
 			type: String,
 			required: [true, "password field is required"],
 			unique: true,
-			minlength: 8,
-			maxlength: 30,
 		},
 	})
 );
