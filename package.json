@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.17.1",
     "joi": "^17.4.1",
     "mongoose": "^5.13.3",
     "uuid": "^8.3.2"
