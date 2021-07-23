@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
 	try {
-		const user = await storageUser.getAll();
-		return res.status(200).send(user);
+		const users = await storageUser.getAll();
+		return res.status(200).send(users);
 	} catch (error) {
 		return res.status(404).send("Not found in DB");
 	}
