@@ -5,9 +5,11 @@ let storageUser = {
 		try {
 			const resultUser = await User.find();
 
+			if (!resultUser) throw new Error("Not found in DB");
+
 			return resultUser;
 		} catch (error) {
-			throw new Error("No users in DB");
+			return "No users in DB";
 		}
 	},
 
@@ -15,9 +17,11 @@ let storageUser = {
 		try {
 			let user = await User.findOne({ _id: id });
 
+			if (!user) throw new Error("Not found in DB");
+
 			return user;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -26,7 +30,7 @@ let storageUser = {
 			const resultUser = await User.create(data);
 			return resultUser;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -42,7 +46,7 @@ let storageUser = {
 
 			return user;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -52,7 +56,7 @@ let storageUser = {
 
 			return "Deleted";
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 };

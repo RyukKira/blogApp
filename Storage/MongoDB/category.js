@@ -42,8 +42,6 @@ let storageCategory = {
 				{ new: true }
 			);
 
-			console.log(category);
-
 			return category;
 		} catch (error) {
 			return error.message;
