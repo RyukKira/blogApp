@@ -5,36 +5,31 @@ let storageTag = {
 		try {
 			const tags = await Tag.find();
 
-			if (!tags) {
-				return "Not found in DB";
-			}
-
 			return tags;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	getOne: async id => {
 		try {
 			const tag = await Tag.findOne({ _id: id });
 
-			if (!tag) {
-				return "Not found in DB";
-			}
-
 			return tag;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	create: async data => {
 		try {
-			let tag = await Post.create(data);
+			let tag = await Tag.create(data);
 			return tag;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	updateOne: async (id, data) => {
 		try {
 			let tag = await Tag.findOneAndUpdate(
@@ -43,22 +38,19 @@ let storageTag = {
 				{ new: true }
 			);
 
-			if (!tag) {
-				return "Not found in DB";
-			}
-
 			return tag;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	deleteOne: async id => {
 		try {
 			await Tag.findByIdAndRemove({ _id: id });
 
 			return "Deleted";
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
 };

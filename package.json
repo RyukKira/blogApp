@@ -1,27 +1,29 @@
 {
-  "name": "blogApp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "joi": "^17.4.1",
-    "mongoose": "^5.13.3",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RyukKira/blogApp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RyukKira/blogApp/issues"
-  },
-  "homepage": "https://github.com/RyukKira/blogApp#readme"
+	"name": "blogapp",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"express": "^4.17.1",
+		"jest": "^27.0.6",
+		"joi": "^17.4.1",
+		"mongoose": "^5.13.3",
+		"uuid": "^8.3.2",
+		"winston": "^3.3.3"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "jest --collectCoverage"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RyukKira/blogApp.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/RyukKira/blogApp/issues"
+	},
+	"homepage": "https://github.com/RyukKira/blogApp#readme"
 }

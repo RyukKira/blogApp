@@ -5,36 +5,31 @@ let storageUser = {
 		try {
 			const resultUser = await User.find();
 
-			if (!resultUser) {
-				return "No users in DB";
-			}
-
 			return resultUser;
 		} catch (error) {
-			return error.message;
+			throw new Error("No users in DB");
 		}
 	},
+
 	getOne: async id => {
 		try {
 			let user = await User.findOne({ _id: id });
 
-			if (!user) {
-				return "Not found in DB";
-			}
-
 			return user;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	create: async data => {
 		try {
 			const resultUser = await User.create(data);
 			return resultUser;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	updateOne: async (id, data) => {
 		try {
 			let user = await User.findOneAndUpdate(
@@ -45,22 +40,19 @@ let storageUser = {
 				{ new: true }
 			);
 
-			if (!user) {
-				return "Not found in DB";
-			}
-
 			return user;
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
+
 	deleteOne: async id => {
 		try {
 			await User.findByIdAndRemove({ _id: id });
 
 			return "Deleted";
 		} catch (error) {
-			return error.message;
+			throw new Error(error.message);
 		}
 	},
 };
