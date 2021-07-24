@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
+const Schema = mongoose.Schema;
 
-const Tag = mongoose.model(
-	"Tag",
-	mongoose.Schema({
-		_id: {
-			type: String,
-			default: uuid(),
-		},
-		name: {
-			type: String,
-			required: [true, "Name field is required"],
-		},
-	})
-);
+const Tag = new Schema({
+	_id: {
+		type: String,
+		default: uuidv4(),
+	},
+	name: {
+		type: String,
+		required: [true, "Name field is required"],
+	},
+});
 
-module.exports = Tag;
+module.exports = mongoose.model("Tag", Tag);

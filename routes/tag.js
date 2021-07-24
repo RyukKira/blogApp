@@ -1,12 +1,12 @@
-const validateCategory = require("../validators/category");
-const storageCategory = require("../Storage/MongoDB/category");
+const storageTag = require("../Storage/MongoDB/tag");
+const validateTag = require("../validators/tag");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
 	try {
-		const categories = await storageCategory.getAll();
-		return res.status(200).send(categories);
+		const tags = await storageTag.getAll();
+		return res.status(200).send(tags);
 	} catch (error) {
 		return res.status(404).send("Not found in DB");
 	}
@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
-		const category = await storageCategory.getOne(req.params.id);
-		return res.status(200).send(category);
+		const tag = await storageTag.getOne(req.params.id);
+		return res.status(200).send(tag);
 	} catch (error) {
 		return res.status(404).send("Not found in DB with the given ID");
 	}
@@ -23,11 +23,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
 	try {
-		const { error } = validateCategory(req.body);
+		const { error } = validateTag(req.body);
 		if (error) throw new Error(error.message);
 
-		const category = await storageCategory.create(req.body);
-		return res.status(201).send({ success: true, id: category });
+		const tag = await storageTag.create(req.body);
+		return res.status(201).send({ success: true, id: tag });
 	} catch (error) {
 		return res.status(404).send("Create valid data, please");
 	}
@@ -35,14 +35,11 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
-		const { error } = validateCategory(req.body);
+		const { error } = validateTag(req.body);
 		if (error) throw new Error(error.message);
 
-		const updatedCategory = await storageCategory.updateOne(
-			req.params.id,
-			req.body
-		);
-		return res.status(200).send({ id: updatedCategory });
+		const updatedTag = await storageTag.updateOne(req.params.id, req.body);
+		return res.status(200).send({ id: updatedTag });
 	} catch (error) {
 		return res.status(404).send("Not found such ID in DB");
 	}
@@ -50,8 +47,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
-		const category = await storageCategory.deleteOne(req.params.id);
-		return res.status(200).send({ msg: category });
+		const tag = await storageTag.deleteOne(req.params.id);
+		return res.status(200).send({ msg: tag });
 	} catch (error) {
 		return res
 			.status(404)
