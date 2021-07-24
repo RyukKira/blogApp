@@ -44,8 +44,8 @@ describe("Category", () => {
 	});
 
 	test("give me all categories", async () => {
-		let allcategories = await storageCategory.getAll();
-		expect(allcategories).toBeTruthy();
+		let allCategories = await storageCategory.getAll();
+		expect(allCategories).toBeTruthy();
 	});
 
 	test("couldn't give me all categories", async () => {

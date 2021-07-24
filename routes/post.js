@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 		const post = await storagePost.create(req.body);
 		return res.status(201).send({ success: true, id: post });
 	} catch (error) {
-		return res.status(404).send("Create valid data, please");
+		return res.status(404).send(error.message);
 	}
 });
 

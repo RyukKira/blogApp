@@ -5,9 +5,11 @@ let storageCategory = {
 		try {
 			const categories = await Category.find();
 
+			if (!categories) throw new Error("Not found in DB");
+
 			return categories;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -15,9 +17,10 @@ let storageCategory = {
 		try {
 			let category = await Category.findOne({ _id: id });
 
+			if (!category) throw new Error("Not found in DB");
 			return category;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -27,7 +30,7 @@ let storageCategory = {
 
 			return category;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -39,9 +42,11 @@ let storageCategory = {
 				{ new: true }
 			);
 
+			console.log(category);
+
 			return category;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -51,7 +56,7 @@ let storageCategory = {
 
 			return "Deleted";
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 };

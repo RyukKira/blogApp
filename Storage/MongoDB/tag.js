@@ -5,9 +5,11 @@ let storageTag = {
 		try {
 			const tags = await Tag.find();
 
+			if (!tags) throw new Error("Not found in DB");
+
 			return tags;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -15,9 +17,11 @@ let storageTag = {
 		try {
 			const tag = await Tag.findOne({ _id: id });
 
+			if (!tag) throw new Error("Not found in DB");
+
 			return tag;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -26,7 +30,7 @@ let storageTag = {
 			let tag = await Tag.create(data);
 			return tag;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -40,7 +44,7 @@ let storageTag = {
 
 			return tag;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -50,7 +54,7 @@ let storageTag = {
 
 			return "Deleted";
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 };

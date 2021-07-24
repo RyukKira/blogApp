@@ -5,9 +5,11 @@ let storagePost = {
 		try {
 			let posts = await Post.find();
 
+			if (!posts) throw new Error("Not found in DB");
+
 			return posts;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -15,9 +17,11 @@ let storagePost = {
 		try {
 			let post = await Post.findOne({ _id: id });
 
+			if (!post) throw new Error("Not found in DB");
+
 			return post;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -26,7 +30,7 @@ let storagePost = {
 			const post = await Post.create(data);
 			return post;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -40,7 +44,7 @@ let storagePost = {
 
 			return post;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 
@@ -50,7 +54,7 @@ let storagePost = {
 
 			return "Deleted";
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 };
