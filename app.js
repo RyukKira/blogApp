@@ -7,7 +7,7 @@ const tagRouter = require("./routes/tag");
 const userRouter = require("./routes/users");
 
 mongoose
-	.connect("mongodb://localhost:27017/todos", {
+	.connect("mongodb://localhost:27017/blogApp", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,

@@ -3,43 +3,34 @@ const { v4: uuidv4 } = require("uuid");
 const User = require("./users");
 const Category = require("./category");
 const Tag = require("./tag");
+const Schema = mongoose.Schema;
 
-const Post = mongoose.model(
-	"Post",
-	mongoose.Schema({
-		_id: {
-			type: String,
-			default: uuidv4(),
-		},
-		userID: {
+const Post = new Schema({
+	_id: {
+		type: String,
+		default: uuidv4(),
+	},
+	title: {
+		type: String,
+		required: [true, "Title field is required"],
+	},
+	body: {
+		type: String,
+		required: [true, "Body field is required"],
+	},
+	categoryID: {
+		type: Schema.Types.ObjectId,
+		ref: "Category",
+	},
+	tag: [
+		{
 			type: Schema.Types.ObjectId,
-			ref: "User",
-			required: [true, "UserID field is required"],
+			ref: "Tag",
 		},
-		title: {
-			type: String,
-			required: [true, "Title field is required"],
-		},
-		body: {
-			type: String,
-			required: [true, "Body field is required"],
-		},
-		categoryID: {
-			type: Schema.Types.ObjectId,
-			ref: "Category",
-			required: [true, "CategoryID field is required"],
-		},
-		tag: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: "Tag",
-				required: [true, "Tag field is required"],
-			},
-		],
-		author: {
-			type: String,
-		},
-	})
-);
+	],
+	author: {
+		type: String,
+	},
+});
 
-module.exports = Post;
+module.exports = mongoose.model("Post", Post);
